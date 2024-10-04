@@ -28,7 +28,7 @@ const fetchSongs = async (folderName) => {
     songsFetched = true; // Set the flag to true
 
     try {
-        const response = await fetch(`albums/${folderName}/`);
+        const response = await fetch(`/albums/${folderName}/`);
         const text = await response.text();
 
         const div = document.createElement('div');
@@ -43,7 +43,7 @@ const fetchSongs = async (folderName) => {
         links.forEach(link => {
             if (link.href.endsWith('.mp3')) {
                 const decodedUrl = decodeURIComponent(link.href);
-                const songName = decodedUrl.split(`albums/${folderName}/`)[1]?.replace('.mp3', '');
+                const songName = decodedUrl.split(`/albums/${folderName}/`)[1]?.replace('.mp3', '');
 
                 if (songName) {
                     songs.push({ name: songName, url: link.href });
