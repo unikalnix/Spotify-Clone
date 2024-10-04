@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soptify Clone</title>
+    <!-- Link stylesheet -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Link fontawesome cdn -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <section class="container">
+        <aside class="left">
+            <div id="cross">X</div>
+            <div class="top">
+                <div class="logo-container">
+                    <img src="logo.svg" alt="">
+                    <h1>Spotify</h1>
+                </div>
+                <ul class="playlist-container">
+                    <li>
+                        <i class="fa-solid fa-house"></i>
+                        <h1>Home</h1>
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <h1>Search</h1>
+                    </li>
+                </ul>
+            </div>
+            <div class="bottom">
+                <div class="playlist-title-container">
+                    <i class="fa-brands fa-playstation"></i>
+                    <h1>Your playlist</h1>
+                </div>
+                <ul id="play-list-songs-ul" class="playlist-songs-container">
+                    <!-- Dynamicall rendered songs here -->
+                </ul>
+            </div>
+        </aside>
+        <div class="right">
+            <nav class="nav-bar">
+                <div class="hamburger" id="hamburger">
+                    <i class="fa-solid fa-bars"></i>
+                </div>
+                <div class="left-right">
+                    <i class="fa-solid fa-chevron-left"></i>
+                    <i class="fa-solid fa-chevron-right"></i>
+                </div>
+                <div class="singup-buttons-container">
+                    <button><i class="fa-solid fa-user"></i>Signup</button>
+                    <button>Login</button>
+                </div>
+            </nav>
+            <div class="songs-container">
+                <div class="songs-folders">
+                    <div data-name="soft music" id="songs-folder" class="songs-folder">
+                        <div class="songs-folder-info-container">
+                            <div class="songs-folder-image-container">
+                                <img src="images/soft music.jpg" alt="">
+                            </div>
+                            <h1>Soft music</h1>
+                            <p>Satinder sartaj</p>
+                        </div>
+                    </div>
+                    <div data-name="aggressive" id="songs-folder" class="songs-folder">
+                        <div class="songs-folder-info-container">
+                            <div class="songs-folder-image-container">
+                                <img src="images/aggressive.jpg" alt="">
+                            </div>
+                            <h1>Aggressive</h1>
+                            <p>Sidhu moose wala</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="seekbar">
+                    <div class="left-seekbar">
+                        <h1 id="song-name"></h1>
+                    </div>
+                    <div class="center-seekbar">
+                        <i class="fa-solid fa-backward-step" id="prev-btn"></i>
+                        <i class="fa-solid fa-play" id="play-btn"></i>
+                        <i class="fa-solid fa-forward-step" id="next-btn"></i>
+                    </div>
+                    <div class="right-seekbar">
+                        <div class="volume-container">
+                            <div class="high-volume-container">
+                                <i id="volume-icon" class="fa-solid fa-volume-high"></i>
+                            </div>
+                            <input type="range" id="volume-range" min="0" max="100" value="100">
+                        </div>
+                        <div class="progress-container">
+                            <input type="range" id="progress-bar" min="0" value="0">
+                            <div class="duration-container">
+                                <span id="duration">0:00 / 0:00</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+</body>
+<script src="script.js"></script>
+
+</html>
