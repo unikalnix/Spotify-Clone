@@ -40,9 +40,10 @@ body {
     background-color: #1f1f1f;
 }
 
-#cross{
+#cross {
+    display: none;
     position: absolute;
-    right:14px;
+    right: 14px;
     top: 10px;
 }
 
@@ -211,7 +212,7 @@ hr {
     gap: 20px;
 }
 
-.hamburger{
+.hamburger {
     cursor: pointer;
     display: none;
 }
@@ -298,7 +299,7 @@ hr {
     background: #2a2a2a;
     padding: 5px 10px;
     border-radius: 5px;
-    height: 230px;
+    height: 245px;
     cursor: pointer;
 }
 
@@ -318,6 +319,7 @@ hr {
 .songs-folder-info-container h1 {
     font-size: 16px;
     font-weight: 500;
+    margin-top: 10px;
 }
 
 .songs-folder-info-container p {
@@ -332,7 +334,7 @@ hr {
     height: 37px;
     overflow: auto;
     display: flex;
-    align-items: center;
+    align-items: start;
     justify-content: flex-start;
 
 }
@@ -365,7 +367,7 @@ hr {
     height: 75px;
     background-color: #C3C6D1;
     position: fixed;
-    bottom: 20px;
+    bottom: 0px;
     border-radius: 5px;
     display: flex;
     align-items: center;
@@ -446,14 +448,14 @@ hr {
 
 /* Thumb color */
 .progress-container input[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance: none;
+    /* -webkit-appearance: none;
     appearance: none;
     width: 20px;
     height: 20px;
     border-radius: 50%;
     background: #000;
     cursor: pointer;
-    margin-top: -5px;
+    margin-top: -5px; */
 }
 
 .high-volume-container {
@@ -510,39 +512,78 @@ input[type="range"]::-webkit-slider-thumb {
     }
 }
 
+@media only screen and (max-width:989px) and (min-width:768px) {
+    .seekbar {
+        justify-content: start;
+        bottom: 0;
+    }
+
+    .left-seekbar {
+        display: none;
+    }
+}
+
 @media only screen and (max-width:768px) {
-    .hamburger{
+    .hamburger {
         display: block;
     }
 
-    .left{
+    .left {
         position: absolute;
         left: -200%;
+        width: 75vw;
     }
 
-    .right{
+    .right {
         width: 100vw;
     }
 
-    .seekbar{
+    .seekbar {
         min-height: 75px;
         flex-direction: column;
         gap: 20px;
         width: 95vw;
         align-items: center;
         justify-content: center;
-        bottom: 40px;
+        bottom: 0;
+        padding: 50px 0px 80px
     }
 
-    .left-seekbar h1{
+    .left-seekbar h1 {
         display: none;
     }
 
-    .right-seekbar{
+    .right-seekbar {
         margin-bottom: 15px;
     }
 
-    .progress-container input{
-        bottom: -23px;
+    .progress-container input {
+        bottom: 20px;
+        width: 90%;
+        left: 22px;
+    }
+
+    #cross {
+        display: block;
+    }
+
+    /* Thumb color */
+    input[type="range"]::-webkit-slider-thumb {
+        top: 20px;
+    }
+
+    .left-seekbar {
+        justify-content: center;
+    }
+}
+
+@media only screen and (max-width:425px) {
+    .songs-folders {
+        justify-content: center;
+    }
+
+    .right-seekbar {
+        justify-content: center;
+        flex-wrap: wrap;
     }
 }

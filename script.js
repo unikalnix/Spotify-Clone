@@ -13,6 +13,7 @@ const progressBar = document.getElementById("progress-bar");
 const durationLabel = document.getElementById("duration");
 const songNameLabel = document.getElementById("song-name");
 const folders = document.querySelectorAll("#songs-folder");
+const sidebar = document.querySelector(".left");
 
 let songs = [];
 let songsFetched = false;
@@ -63,6 +64,7 @@ const fetchSongs = async (folderName) => {
                         <hr>
                     `;
           playListSongsUl.appendChild(li);
+          openSideBar();
         } else {
           console.error("Error parsing song name from URL:", link.href);
         }
@@ -196,40 +198,6 @@ progressBar.addEventListener("mouseup", (e) => {
   }
 });
 
-progressBar.addEventListener("touchstart", () => {
-  if (currentAudio) {
-    currentAudio.pause();
-    isSeeking = true;
-    playBtn.classList.replace("fa-pause", "fa-play");
-    updateLiIcon(currentLi, "fa-pause", "fa-play");
-  }
-});
-
-progressBar.addEventListener("touchmove", (e) => {
-  if (isSeeking && currentAudio) {
-    const rect = progressBar.getBoundingClientRect();
-    const offsetX = e.touches[0].clientX - rect.left;
-    const width = rect.width;
-    const percent = offsetX / width;
-    progressBar.value = percent * progressBar.max;
-  }
-});
-
-progressBar.addEventListener("touchend", (e) => {
-  if (currentAudio && isSeeking) {
-    const rect = progressBar.getBoundingClientRect();
-    const offsetX = e.changedTouches[0].clientX - rect.left;
-    const width = rect.width;
-    const percent = offsetX / width;
-    const newTime = percent * currentAudio.duration;
-    currentAudio.currentTime = newTime;
-    currentAudio.play();
-    isSeeking = false;
-    playBtn.classList.replace("fa-play", "fa-pause");
-    updateLiIcon(currentLi, "fa-play", "fa-pause");
-  }
-});
-
 playListSongsUl.addEventListener("click", (e) => {
   const playlistItem = e.target.closest(".playlist-songs-item");
 
@@ -284,51 +252,40 @@ playBtn.addEventListener("click", togglePlayPause);
 
 folders.forEach((folder) => {
   folder.addEventListener("click", () => {
-    console.log(folder.getAttribute("data-name"));
-
-    fetchSongs(folder.getAttribute("data-name"));
-    openSideBar();
-
+    // Check if the sidebar is open, if it is, close it instead of fetching songs
+    if (sidebar.style.left === "0px") {
+      closeSideBar();
+    } else {
+      fetchSongs(folder.getAttribute("data-name"));
+    }
   });
 });
 
 const hamburger = document.querySelector("#hamburger");
 const cross = document.querySelector("#cross");
-const sidebar = document.querySelector(".left");
 const mainContent = document.querySelector(".right");
 
 // Open the sidebar
 const openSideBar = () => {
   document.querySelector(".left").style.left = "0";
   document.querySelector(".left").style.zIndex = "100";
-  document.querySelector(".left").style.width = "300px";
-  document.querySelector(".right").style.opacity = "0.5";
-
-  // Prevent body scrolling when sidebar is open
+  document.querySelector(".right").style.opacity = "0.2";
   document.querySelector("body").style.overflow = "hidden";
-}
-hamburger.addEventListener("click", openSideBar);
+};
 
 // Close the sidebar
-cross.addEventListener("click", () => {
+const closeSideBar = () => {
   document.querySelector(".left").style.left = "-200%";
   document.querySelector(".right").style.opacity = "1";
-
-  // Re-enable scrolling when sidebar is closed
   document.querySelector("body").style.overflow = "auto";
-});
+};
 
-// Close the sidebar when clicking outside of it
+// Handle clicking outside of sidebar
 document.addEventListener("click", (event) => {
-  const sidebar = document.querySelector(".left");
   const isClickInsideSidebar = sidebar.contains(event.target);
-  const isClickOnHamburger = document.querySelector("#hamburger").contains(event.target);
+  const isClickOnHamburger = hamburger.contains(event.target);
 
-  if (!isClickInsideSidebar && !isClickOnHamburger) {
-    document.querySelector(".left").style.left = "-200%";
-    document.querySelector(".right").style.opacity = "1";
-
-    // Re-enable scrolling when sidebar is closed
-    document.querySelector("body").style.overflow = "auto";
+  if (!isClickInsideSidebar && !isClickOnHamburger && sidebar.style.left === "0px") {
+    closeSideBar();
   }
 });
