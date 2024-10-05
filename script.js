@@ -289,3 +289,5 @@ document.addEventListener("click", (event) => {
     closeSideBar();
   }
 });
+
+//Why it is not happening
