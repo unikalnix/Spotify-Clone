@@ -27,7 +27,9 @@ const fetchSongs = async (folderName) => {
   songsFetched = true;
 
   try {
-    const response = await fetch(`https://github.com/nova-x0/Spotify-Clone/tree/main/albums/${folderName}/`);
+    const response = await fetch('https://github.com/nova-x0/Spotify-Clone/tree/main/albums/Sands%20of%20Time/', {
+      mode: 'no-cors'
+    });
     const text = await response.text();
 
     const div = document.createElement("div");
@@ -271,10 +273,10 @@ const openSideBar = () => {
   document.querySelector(".left").style.zIndex = "100";
   document.querySelector(".right").style.opacity = "0.2";
   document.querySelector("body").style.overflow = "hidden";
-  if(screen.width >= 768){
+  if (screen.width >= 768) {
     cross.style.display = 'hidden'
   }
-  
+
 };
 
 // Close the sidebar
