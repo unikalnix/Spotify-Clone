@@ -271,6 +271,10 @@ const openSideBar = () => {
   document.querySelector(".left").style.zIndex = "100";
   document.querySelector(".right").style.opacity = "0.2";
   document.querySelector("body").style.overflow = "hidden";
+  if(screen.width >= 768){
+    cross.style.display = 'hidden'
+  }
+  
 };
 
 // Close the sidebar
@@ -279,6 +283,10 @@ const closeSideBar = () => {
   document.querySelector(".right").style.opacity = "1";
   document.querySelector("body").style.overflow = "auto";
 };
+
+cross.addEventListener('click', closeSideBar);
+hamburger.addEventListener('click', openSideBar);
+
 
 // Handle clicking outside of sidebar
 document.addEventListener("click", (event) => {
