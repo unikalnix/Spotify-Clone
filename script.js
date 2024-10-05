@@ -27,7 +27,7 @@ const fetchSongs = async (folderName) => {
   songsFetched = true;
 
   try {
-    const response = await fetch(` https://nova-x0.github.io/albums/${folderName}/`);
+    const response = await fetch(`https://nova-x0.github.io/albums/${folderName}/`);
     const text = await response.text();
 
     const div = document.createElement("div");
@@ -42,7 +42,7 @@ const fetchSongs = async (folderName) => {
       if (link.href.endsWith(".mp3")) {
         const decodedUrl = decodeURIComponent(link.href);
         const songName = decodedUrl
-          .split(` https://nova-x0.github.io/albums/${folderName}/`)[1]
+          .split(`https://nova-x0.github.io/albums/${folderName}/`)[1]
           ?.replace(".mp3", "");
 
         if (songName) {
