@@ -285,16 +285,50 @@ playBtn.addEventListener("click", togglePlayPause);
 folders.forEach((folder) => {
   folder.addEventListener("click", () => {
     console.log(folder.getAttribute("data-name"));
+
     fetchSongs(folder.getAttribute("data-name"));
+    openSideBar();
+
   });
 });
 
-hamburger.addEventListener("click", () => {
-  document.querySelector(".left").style.left = 0;
-  document.querySelector(".left").style.zIndex = 100;
-  document.querySelector(".left").style.width = "300px";
-});
+const hamburger = document.querySelector("#hamburger");
+const cross = document.querySelector("#cross");
+const sidebar = document.querySelector(".left");
+const mainContent = document.querySelector(".right");
 
+// Open the sidebar
+const openSideBar = () => {
+  document.querySelector(".left").style.left = "0";
+  document.querySelector(".left").style.zIndex = "100";
+  document.querySelector(".left").style.width = "300px";
+  document.querySelector(".right").style.opacity = "0.5";
+
+  // Prevent body scrolling when sidebar is open
+  document.querySelector("body").style.overflow = "hidden";
+}
+hamburger.addEventListener("click", openSideBar);
+
+// Close the sidebar
 cross.addEventListener("click", () => {
   document.querySelector(".left").style.left = "-200%";
+  document.querySelector(".right").style.opacity = "1";
+
+  // Re-enable scrolling when sidebar is closed
+  document.querySelector("body").style.overflow = "auto";
+});
+
+// Close the sidebar when clicking outside of it
+document.addEventListener("click", (event) => {
+  const sidebar = document.querySelector(".left");
+  const isClickInsideSidebar = sidebar.contains(event.target);
+  const isClickOnHamburger = document.querySelector("#hamburger").contains(event.target);
+
+  if (!isClickInsideSidebar && !isClickOnHamburger) {
+    document.querySelector(".left").style.left = "-200%";
+    document.querySelector(".right").style.opacity = "1";
+
+    // Re-enable scrolling when sidebar is closed
+    document.querySelector("body").style.overflow = "auto";
+  }
 });

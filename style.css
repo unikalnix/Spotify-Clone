@@ -36,11 +36,13 @@ body {
     width: 25vw;
     height: 100vh;
     overflow: hidden;
+    transition: all 0.5s;
+    background-color: #1f1f1f;
 }
 
 #cross{
     position: absolute;
-    right:30px;
+    right:14px;
     top: 10px;
 }
 
